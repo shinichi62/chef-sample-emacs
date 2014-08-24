@@ -32,6 +32,7 @@ end
 bash 'install cask' do
   user 'vagrant'
   group 'vagrant'
+  environment 'HOME' => '/home/vagrant'
   cwd '/home/vagrant'
   not_if 'ls /home/vagrant/.cask'
   code <<-EOH
@@ -46,13 +47,13 @@ directory '/home/vagrant/.emacs.d' do
   action :create
 end
 
-bash 'cask init' do
+bash 'init cask' do
   user 'vagrant'
   group 'vagrant'
   cwd '/home/vagrant/.emacs.d'
+  not_if 'ls /home/vagrant/.emacs.d/Cask'
   code <<-EOH
     /home/vagrant/.cask/bin/cask init
-    /home/vagrant/.cask/bin/cask
   EOH
 end
 
@@ -60,4 +61,13 @@ end
   template tp do
     mode '0644'
   end
+end
+
+bash 'cask' do
+  user 'vagrant'
+  group 'vagrant'
+  cwd '/home/vagrant/.emacs.d'
+  code <<-EOH
+    /home/vagrant/.cask/bin/cask
+  EOH
 end
