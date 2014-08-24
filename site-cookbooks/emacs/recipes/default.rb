@@ -57,8 +57,10 @@ bash 'init cask' do
   EOH
 end
 
-%w{/home/vagrant/.emacs.d/init.el}.each do |tp|
+%w{/home/vagrant/.emacs.d/init.el /home/vagrant/.emacs.d/Cask}.each do |tp|
   template tp do
+    user 'vagrant'
+    group 'vagrant'
     mode '0644'
   end
 end

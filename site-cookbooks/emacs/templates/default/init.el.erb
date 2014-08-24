@@ -5,3 +5,10 @@
 (global-set-key (kbd "C-/") 'undo)
 (global-set-key (kbd "M-g") 'goto-line)
 (define-key global-map (kbd "\C-cl") 'toggle-truncate-lines)
+
+; anything
+(require 'anything-startup)
+
+; help
+(require 'helm-config)
+(global-set-key (kbd "C-c h") 'helm-mini)
